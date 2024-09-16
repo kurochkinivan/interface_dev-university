@@ -4,32 +4,29 @@
 
 using namespace std;
 
-string removeSpaces(const std::string &input)
+string removeSpaces(const string &input)
 {
     string result = input;
     result.erase(remove_if(result.begin(), result.end(), ::isspace), result.end());
     return result;
 }
 
-bool isPassportValid(string &passport)
+bool isPassportValid(const Passport &passport)
 {
-    passport = removeSpaces(passport);
-
-    if (passport.length() != 11)
+    if (passport.ss.length() != 4 || passport.nn.length() != 6)
         return false;
-
-    for (int i = 0; i < passport.length(); i++)
+    
+    for (int i = 0; i < passport.ss.length(); i++)
     {
-        if (i == 4)
-        {
-            if (passport[i] != '-')
-                return false;
-        }
-        else if (!isdigit(passport[i]))
+        if (!isdigit(passport.ss[i]))
             return false;
     }
 
-    passport.insert(2, " ");
+    for (int i = 0; i < passport.nn.length(); i++)
+    {
+        if (!isdigit(passport.nn[i]))
+            return false;
+    }
 
     return true;
 }
@@ -82,6 +79,14 @@ bool isPhoneValid(string &phone)
         if (!isdigit(phone[i]))
             return false;
     }
+
+    return true;
+}
+
+bool isTemperatureValid(double &temp)
+{
+    if (temp < 0 || temp > 50)
+        return false;
 
     return true;
 }

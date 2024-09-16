@@ -22,8 +22,7 @@ string getName()
     {
         cin >> name;
 
-        // TODO: Решить проблему с символами кириллицы
-        regex pattern("^[A-Za-zА-Яа-яЁё' -]+$");
+        regex pattern("^[A-Za-z'-]+$");
         if (regex_match(name, pattern))
             return name;
         else
@@ -34,19 +33,23 @@ string getName()
     }
 }
 
-string getPassport()
+Passport getPassport()
 {
-    cout << "Введите паспорт пациента в формате (ssss-nnnnnn)..." << endl;
-    string passport;
+    Passport passport;
     while (true)
     {
-        cin >> passport;
+        cout << "Введите серию паспорта пациента (4 цифры)..." << endl;
+        cin >> passport.ss;
+        cout << "Введите номер паспорта пациента (6 цифр)..." << endl;
+        cin >> passport.nn;
+
+        cout << "Паспорт: " << passport.ss << "-" << passport.nn << endl;
 
         if (isPassportValid(passport))
             return passport;
         else
         {
-            cerr << invalidInputMessageF("ssss-nnnnnn (тире обязательно)") << endl;
+            cerr << invalidInputMessageF("серия: 4 цифры, номер: 6 цифр") << endl;
             continue;
         }
     }
@@ -84,7 +87,15 @@ double getTemperature()
     while (true)
     {
         if (cin >> number)
-            return number;
+            if (isTemperatureValid(number))
+                return number;
+            else
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cerr << invalidInputMessageF("температура должна быть в диапазоне от 0 до 50") << endl;
+                continue;
+            }
         else
         {
             cin.clear();
