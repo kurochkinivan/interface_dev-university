@@ -1,6 +1,7 @@
 #include <string>
 #include <algorithm>
 #include <iostream>
+#include "structs.h"
 
 using namespace std;
 
@@ -115,10 +116,11 @@ string formatPhone(string &phone)
     return "";
 }
 
-tuple<int, int, int> parseDate(string &date)
+Date parseDate(string &date)
 {
-    int dd = stoi(date.substr(0, 2));
-    int mm = stoi(date.substr(3, 2));
-    int yyyy = stoi(date.substr(6, 4));
-    return make_tuple(dd, mm, yyyy);
+    Date d;
+    d.dd = stoi(date.substr(0, 2));
+    d.mm = stoi(date.substr(3, 2));
+    d.yyyy = stoi(date.substr(6, 4));
+    return d;
 }

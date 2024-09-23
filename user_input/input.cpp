@@ -65,12 +65,7 @@ Date getDate()
 
         if (isDateValid(birth_date))
         {
-            auto [dd, mm, yyyy] = parseDate(birth_date);
-            Date d;
-            d.dd = dd;
-            d.mm = mm;
-            d.yyyy = yyyy;
-            return d;
+            return parseDate(birth_date);
         }
         else
         {

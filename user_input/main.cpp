@@ -9,16 +9,16 @@ int main()
 {
     Patient patient;
 
-    // patient.name = getName();
+    patient.name = getName();
 
     patient.passport = getPassport();
 
-    // Date date = getDate();
-    // patient.birth_date = date;
+    Date date = getDate();
+    patient.birth_date = date;
 
-    // patient.phone = getPhone();
+    patient.phone = getPhone();
 
-    // patient.temperature = getTemperature();
+    patient.temperature = getTemperature();
 
     cout << "Имя: " << patient.name << endl;
     cout << "Паспорт: " << patient.passport.ss << "-" << patient.passport.nn << endl;
