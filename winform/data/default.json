@@ -1,0 +1,62 @@
+[
+  {
+    "PlayerName": "Alice",
+    "Score": 250,
+    "DatePlayed": "2024-10-01T14:25:00Z",
+    "Level": 3
+  },
+  {
+    "PlayerName": "Bob",
+    "Score": 180,
+    "DatePlayed": "2024-10-02T18:10:00Z",
+    "Level": 2
+  },
+  {
+    "PlayerName": "Alice",
+    "Score": 320,
+    "DatePlayed": "2024-10-03T12:15:00Z",
+    "Level": 4
+  },
+  {
+    "PlayerName": "Charlie",
+    "Score": 150,
+    "DatePlayed": "2024-10-04T16:00:00Z",
+    "Level": 1
+  },
+  {
+    "PlayerName": "Alice",
+    "Score": 290,
+    "DatePlayed": "2024-10-05T20:45:00Z",
+    "Level": 3
+  },
+  {
+    "PlayerName": "Bob",
+    "Score": 210,
+    "DatePlayed": "2024-10-06T09:30:00Z",
+    "Level": 2
+  },
+  {
+    "PlayerName": "Charlie",
+    "Score": 175,
+    "DatePlayed": "2024-10-07T14:20:00Z",
+    "Level": 1
+  },
+  {
+    "PlayerName": "Alice",
+    "Score": 350,
+    "DatePlayed": "2024-10-08T11:00:00Z",
+    "Level": 5
+  },
+  {
+    "PlayerName": "Bob",
+    "Score": 230,
+    "DatePlayed": "2024-10-09T19:30:00Z",
+    "Level": 3
+  },
+  {
+    "PlayerName": "Charlie",
+    "Score": 190,
+    "DatePlayed": "2024-10-10T17:10:00Z",
+    "Level": 2
+  }
+]
