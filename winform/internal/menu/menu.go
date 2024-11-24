@@ -10,6 +10,8 @@ var (
 	settingsWindowShown   bool = false
 	statisticsWindowShown bool = false
 
+	statisticsWindow *fyne.Window
+
 	pathToFile string = "default.json"
 )
 
@@ -20,15 +22,15 @@ func CreateMenu(a *fyne.App) *fyne.MainMenu {
 		}
 	}))
 
-	settingsMenu := fyne.NewMenu("Настройки", fyne.NewMenuItem("Перейти в настройки", func() {
-		if !settingsWindowShown {
-			windows.NewSettingsWindow(a, &settingsWindowShown, &pathToFile, "Настройки")
+	statisticsMenu := fyne.NewMenu("Статистика", fyne.NewMenuItem("Посмотреть статистику", func() {
+		if !statisticsWindowShown {
+			statisticsWindow = windows.NewStatisticsWindow(a, &statisticsWindowShown, pathToFile, "Статистика")
 		}
 	}))
 
-	statisticsMenu := fyne.NewMenu("Статистика", fyne.NewMenuItem("Посмотреть статистику", func() {
-		if !statisticsWindowShown {
-			windows.NewStatisticsWindow(a, &statisticsWindowShown, pathToFile, "Статистика")
+	settingsMenu := fyne.NewMenu("Настройки", fyne.NewMenuItem("Перейти в настройки", func() {
+		if !settingsWindowShown {
+			windows.NewSettingsWindow(a, &settingsWindowShown, &pathToFile, "Настройки", statisticsWindow)
 		}
 	}))
 
