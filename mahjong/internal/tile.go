@@ -19,20 +19,20 @@ const (
 
 type Tile struct {
 	ID       int
-	Position TilePosition
+	Position Point
 	Removed  bool
 	Image    *ebiten.Image
 }
 
-type TilePosition struct {
-	X float64
-	Y float64
+type Point struct {
+	X int
+	Y int
 }
 
-func NewTile(id int, x, y float64, removed bool) *Tile {
+func NewTile(id int, x, y int, removed bool) *Tile {
 	return &Tile{
 		ID: id,
-		Position: TilePosition{
+		Position: Point{
 			X: x,
 			Y: y,
 		},
@@ -65,8 +65,8 @@ func (t *Tile) DrawTile(screen *ebiten.Image, offsetX, offsetY int, selectedX, s
 		return
 	}
 
-	x := float64(offsetX) + t.Position.X*(tileSize+tileMargin)
-	y := float64(offsetY) + t.Position.Y*(tileSize+tileMargin)
+	x := float64(offsetX) + float64(t.Position.X)*(tileSize+tileMargin)
+	y := float64(offsetY) + float64(t.Position.Y)*(tileSize+tileMargin)
 
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Translate(x, y)

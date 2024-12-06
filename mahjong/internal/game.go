@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"fmt"
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -32,24 +33,25 @@ func (g *Game) Update() error {
 		// Вычисляем смещение для центра поля
 		offsetX, offsetY := CenterOffSet(ScreenWidth, ScreenHeight)
 
-		tileXIdx := (cursorX - offsetX) / (tileSize + tileMargin)
-		tileYIdx := (cursorY - offsetY) / (tileSize + tileMargin)
+		tileX := (cursorX - offsetX) / (tileSize + tileMargin)
+		tileY := (cursorY - offsetY) / (tileSize + tileMargin)
 
-		if !(tileXIdx >= 0 && tileXIdx < len(g.board[0]) && tileYIdx >= 0 && tileYIdx < len(g.board)) {
+		if !(0 <= tileX && tileX < len(g.board[0]) && 0 <= tileY && tileY < len(g.board)) {
 			return nil
 		}
 
-		if g.selectedX == tileXIdx && g.selectedY == tileYIdx {
+		if g.selectedX == tileX && g.selectedY == tileY {
 			return nil
 		}
 
-		if g.board.CanConnect(g.selectedX, g.selectedY, tileXIdx, tileYIdx) {
+		fmt.Println("selected:", g.selectedX, g.selectedY, "new:", tileX, tileY)
+		if g.board.CanConnect(g.selectedX, g.selectedY, tileX, tileY) {
 			println("SUCCESS!")
-			return nil 
+			return nil
 		}
-		
-		g.selectedX = tileXIdx
-		g.selectedY = tileYIdx
+
+		g.selectedX = tileX
+		g.selectedY = tileY
 
 	}
 	return nil
