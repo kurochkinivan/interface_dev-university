@@ -14,15 +14,15 @@ const (
 
 type Game struct {
 	board     Board
-	selectedX int
-	selectedY int
+	selectedXAxe int
+	selectedYAxe int
 }
 
 func NewGame(board Board) *Game {
 	return &Game{
 		board:     board,
-		selectedX: -1,
-		selectedY: -1,
+		selectedXAxe: -1,
+		selectedYAxe: -1,
 	}
 }
 
@@ -33,25 +33,25 @@ func (g *Game) Update() error {
 		// Вычисляем смещение для центра поля
 		offsetX, offsetY := CenterOffSet(ScreenWidth, ScreenHeight)
 
-		tileX := (cursorX - offsetX) / (tileSize + tileMargin)
-		tileY := (cursorY - offsetY) / (tileSize + tileMargin)
+		tileXAxe := (cursorX - offsetX) / (tileSize + tileMargin)
+		tileYAxe := (cursorY - offsetY) / (tileSize + tileMargin)
 
-		if !(0 <= tileX && tileX < len(g.board[0]) && 0 <= tileY && tileY < len(g.board)) {
+		if !(0 <= tileXAxe && tileXAxe < len(g.board[0]) && 0 <= tileYAxe && tileYAxe < len(g.board)) {
 			return nil
 		}
 
-		if g.selectedX == tileX && g.selectedY == tileY {
+		if g.selectedXAxe == tileXAxe && g.selectedYAxe == tileYAxe {
 			return nil
 		}
 
-		fmt.Println("selected:", g.selectedX, g.selectedY, "new:", tileX, tileY)
-		if g.board.CanConnect(g.selectedX, g.selectedY, tileX, tileY) {
+		fmt.Println("selected:", g.selectedXAxe, g.selectedYAxe, "new:", tileXAxe, tileYAxe)
+		if g.board.CanConnect(g.selectedXAxe, g.selectedYAxe, tileXAxe, tileYAxe) {
 			println("SUCCESS!")
 			return nil
 		}
 
-		g.selectedX = tileX
-		g.selectedY = tileY
+		g.selectedXAxe = tileXAxe
+		g.selectedYAxe = tileYAxe
 
 	}
 	return nil
@@ -63,7 +63,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	for _, row := range g.board {
 		for _, tile := range row {
-			tile.DrawTile(screen, offsetX, offsetY, g.selectedX, g.selectedY)
+			tile.DrawTile(screen, offsetX, offsetY, g.selectedXAxe, g.selectedYAxe)
 		}
 	}
 }

@@ -55,6 +55,7 @@ func (b Board) CanConnect(x1, y1, x2, y2 int) bool {
 	return BFS(b, point1, point2, 3)
 }
 
+// TODO: think of borders of graph
 func BFS(graph [][]*Tile, start, end TurnsPoint, maxTurns int) bool {
 	n := len(graph)
 	m := len(graph[0])
@@ -83,7 +84,7 @@ func BFS(graph [][]*Tile, start, end TurnsPoint, maxTurns int) bool {
 
 		if end.tile.Position.X == cur.tile.Position.X && end.tile.Position.Y == cur.tile.Position.Y {
 			fmt.Println("ID", start.tile.ID, end.tile.ID)
-			return true
+			return start.tile.ID == end.tile.ID
 		}
 
 		for _, dir := range directions {
@@ -106,8 +107,8 @@ func BFS(graph [][]*Tile, start, end TurnsPoint, maxTurns int) bool {
 }
 
 func isValid(x, y, n, m int, graph [][]*Tile, visited [][]bool, want *Tile) bool {
-	return 0 <= x && x < n && 0 <= y && y < m && !visited[y][x] &&
-		(graph[x][y].Removed || (graph[y][x].Position.X == want.Position.X && graph[y][x].Position.Y == want.Position.Y))
+	return 0 <= x && x < m && 0 <= y && y < n && !visited[y][x] &&
+		(graph[y][x].Removed || (graph[y][x].Position.X == want.Position.X && graph[y][x].Position.Y == want.Position.Y))
 }
 
 func InitializeBoard() Board {
