@@ -44,12 +44,19 @@ func (g *Game) Update() error {
 			return nil
 		}
 
-		fmt.Println("selected:", g.selectedXAxe, g.selectedYAxe, "new:", tileXAxe, tileYAxe)
-		if g.board.CanConnect(g.selectedXAxe, g.selectedYAxe, tileXAxe, tileYAxe) {
-			println("SUCCESS!")
+		if g.board[tileYAxe][tileXAxe].ID == 0 {
 			return nil
 		}
 
+		fmt.Println("selected:", g.selectedXAxe, g.selectedYAxe, "new:", tileXAxe, tileYAxe)
+		if g.board.CanConnect(g.selectedXAxe, g.selectedYAxe, tileXAxe, tileYAxe) {
+			g.board[tileYAxe][tileXAxe].Removed = true
+			g.board[g.selectedYAxe][g.selectedXAxe].Removed = true
+			g.selectedXAxe, g.selectedYAxe = -1, -1 
+			return nil
+		}
+
+		PrintRemovedMatrix(g.board)
 		g.selectedXAxe = tileXAxe
 		g.selectedYAxe = tileYAxe
 
